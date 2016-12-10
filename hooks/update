@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo $PWD >> /home/ubuntu/workspace/update.txt
+echo "update\\n" >> /home/ubuntu/workspace/update.txt
+while read oldrev newrev ref
+do
+    if [[ $ref =~ .*/master$ ]];
+    then
+        echo "Master ref received.  Deploying master branch to production..."
+    else
+        echo "Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server."
+    fi
+done

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo $PWD >> /home/ubuntu/workspace/postreceive.txt
+echo "post-receive\\n" >> /home/ubuntu/workspace/postreceive.txt
+while read oldrev newrev ref
+do
+    if [[ $ref =~ .*/master$ ]];
+    then
+        echo "Master ref received.  Deploying master branch to production..."
+    else
+        echo "Ref $ref successfully received.  Doing nothing: only the master branch may be deployed on this server."
+    fi
+done
